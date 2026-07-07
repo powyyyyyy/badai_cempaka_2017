@@ -185,7 +185,8 @@ Y = Rainfall (mm)
 📷
 
 ```md
-![Timeseries d02](images/timeseries_d02.png)
+<img width="846" height="386" alt="d02_rainrate" src="https://github.com/user-attachments/assets/7a0e7807-1b86-4352-9f0d-abe5a00fa066" />
+
 ```
 
 ---
@@ -195,7 +196,8 @@ Y = Rainfall (mm)
 📷
 
 ```md
-![Timeseries d03](images/timeseries_d03.png)
+<img width="855" height="386" alt="d03_rainrate" src="https://github.com/user-attachments/assets/c3b3134c-b82d-4449-bd96-c9b1cf4a68ae" />
+
 ```
 
 ---
@@ -209,7 +211,8 @@ Visualisasi distribusi hujan per jam.
 📷
 
 ```md
-![Hourly Rainfall](images/hourly_rainfall.png)
+<img width="647" height="548" alt="d03 hourly rainfall" src="https://github.com/user-attachments/assets/5e60fb99-52cc-40b1-b0cd-c8f71d74b709" />
+
 ```
 
 ---
@@ -221,7 +224,8 @@ Akumulasi hujan selama event.
 📷
 
 ```md
-![Accumulated Rainfall](images/accumulated_rainfall.png)
+<img width="655" height="528" alt="d03_accumulated" src="https://github.com/user-attachments/assets/3547ccd9-0c88-4f58-a510-2db81fee7a0f" />
+
 ```
 
 ---
@@ -233,7 +237,8 @@ Akumulasi hujan selama event.
 📷
 
 ```md
-![MSWEP Hourly](images/mswep_hourly.png)
+<img width="655" height="528" alt="mswep_hourly_observ" src="https://github.com/user-attachments/assets/68d38fbd-7743-4ce0-92dc-4fac94e705a0" />
+
 ```
 
 ---
@@ -243,7 +248,8 @@ Akumulasi hujan selama event.
 📷
 
 ```md
-![MSWEP Accumulated](images/mswep_accumulated.png)
+<img width="664" height="528" alt="mswep_accumulate_rainobserv" src="https://github.com/user-attachments/assets/2a0520e0-235b-4644-835e-f6d99c797b4f" />
+
 ```
 
 ---
