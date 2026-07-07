@@ -213,13 +213,15 @@ Y = Curah Hujan (mm/jam)
 
 ## Curah Hujan per Jam
 
-📷
+<img width="1337" height="1219" alt="per 6 jam" src="https://github.com/user-attachments/assets/8d45f768-b730-40cd-b22b-27f1fd2ba9c9" />
+
 
 ---
 
 ## Curah Hujan Akumulasi
 
-📷
+<img width="609" height="568" alt="acumulated-wrf" src="https://github.com/user-attachments/assets/65e6715b-a0da-469c-b4cc-9b80392a2bd8" />
+
 
 ---
 
@@ -233,7 +235,8 @@ Y = Curah Hujan (mm/jam)
 
 ## Curah Hujan Akumulasi
 
-📷
+<img width="618" height="568" alt="acumulated-mswep" src="https://github.com/user-attachments/assets/ba0231a0-4da7-4937-941d-40dfe5180671" />
+
 
 ---
 
@@ -292,6 +295,7 @@ Nilai SSIM sebesar **0.336** menunjukkan bahwa WRF mampu membentuk pola hujan ya
 Rainfall Centroid digunakan untuk mengetahui seberapa jauh posisi pusat hujan hasil simulasi terhadap observasi.
 
 ### Hasil
+<img width="474" height="451" alt="centroid" src="https://github.com/user-attachments/assets/525aa068-ef33-44c0-afe4-73d7a27064c0" />
 
 | Metrik | Nilai |
 |---------|-------:|
@@ -352,7 +356,8 @@ Interpretasi:
 - Positif → Overestimate
 - Negatif → Underestimate
 
-📷
+<img width="621" height="568" alt="difference" src="https://github.com/user-attachments/assets/e2a0e63e-0758-49ee-a867-313a4dcd5d00" />
+
 
 ---
 
@@ -368,7 +373,8 @@ vs
 Curah Hujan MSWEP
 ```
 
-📷
+<img width="542" height="547" alt="scatter" src="https://github.com/user-attachments/assets/75e8a982-8444-46f1-b122-e5d9e1f73d84" />
+
 
 ---
 
