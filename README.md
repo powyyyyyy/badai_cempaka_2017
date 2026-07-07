@@ -238,7 +238,8 @@ Y = Curah Hujan (mm/jam)
 
 ## Curah Hujan per Jam
 
-📷
+<img width="655" height="528" alt="mswep_hourly_observ" src="https://github.com/user-attachments/assets/21b861f5-a971-4fa4-8e60-78298b13fcf3" />
+
 
 ---
 
