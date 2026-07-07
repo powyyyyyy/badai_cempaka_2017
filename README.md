@@ -199,13 +199,22 @@ Y = Curah Hujan (mm/jam)
 
 ## Domain d02
 
-📷
+<img width="846" height="386" alt="d02_rainrate" src="https://github.com/user-attachments/assets/5047ddca-82c4-4c63-8b3e-f5dfcb9d0722" />
+
 
 ---
 
 ## Domain d03
 
-📷
+<img width="855" height="386" alt="d03_rainrate" src="https://github.com/user-attachments/assets/e0ce1e6c-ff69-4bea-86d3-6fcf63f89562" />
+
+
+---
+
+## Domain Average Rainfall Rate Time Series\nTC Cempaka (26-29 November 2017)
+
+<img width="932" height="441" alt="dom avg" src="https://github.com/user-attachments/assets/6b0c63b0-9f09-42fe-9431-9cf64b686f1a" />
+
 
 ---
 
