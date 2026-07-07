@@ -1,44 +1,49 @@
-# 🌧️ WRF Simulation and Validation of Tropical Cyclone Cempaka (2017)
+# 🌧️ Simulasi dan Validasi WRF pada Kejadian Siklon Tropis Cempaka (2017)
 
-> Numerical Weather Prediction using **WRF-ARW** and rainfall validation against **MSWEP** observations during the Tropical Cyclone Cempaka event (26–29 November 2017).
+> Simulasi Numerical Weather Prediction (NWP) menggunakan **WRF-ARW** serta validasi curah hujan terhadap data observasi **MSWEP** pada kejadian Siklon Tropis Cempaka.
 
 ---
 
-# 📖 Manual
+# 📖 Manual Instalasi
 
-Complete installation guide for **WRF**, **WPS**, **Docker**, and the simulation workflow:
+Panduan lengkap instalasi WRF, WPS, Docker, hingga proses running simulasi dapat dilihat pada repository berikut:
 
 👉 https://github.com/powyyyyyy/wrf_manual
 
 ---
 
-# 📌 Project Overview
+# 📌 Gambaran Proyek
 
-This project performs a high-resolution numerical weather simulation of **Tropical Cyclone Cempaka (2017)** using the **Weather Research and Forecasting (WRF-ARW)** model.
+Project ini bertujuan untuk mensimulasikan kejadian hujan ekstrem yang dipicu oleh **Siklon Tropis Cempaka** menggunakan model **Weather Research and Forecasting (WRF-ARW)**.
 
-The simulation is initialized using **ERA5 Reanalysis** datasets and validated against **MSWEP** precipitation observations to evaluate the model's capability in reproducing an extreme rainfall event over southern Java.
+Model dijalankan menggunakan data **ERA5 Reanalysis** sebagai **Initial Condition (IC)** dan **Boundary Condition (BC)**. Selanjutnya, hasil simulasi dibandingkan dengan data curah hujan observasi **MSWEP** untuk mengetahui seberapa baik WRF mampu merepresentasikan distribusi hujan selama kejadian tersebut.
 
-The project includes both qualitative (spatial visualization) and quantitative (statistical validation) analyses.
+Analisis dilakukan secara:
 
----
-
-# 🎯 Objectives
-
-The objectives of this project are:
-
-- Simulate the atmospheric conditions during Tropical Cyclone Cempaka.
-- Generate hourly and accumulated rainfall using WRF.
-- Analyze rainfall evolution throughout the event.
-- Compare WRF rainfall with MSWEP observations.
-- Evaluate model performance using spatial and statistical metrics.
+- Visual (peta distribusi hujan)
+- Temporal (time series)
+- Statistik (RMSE, MAE, Bias, Korelasi, R²)
+- Spasial (SSIM dan Rainfall Centroid)
 
 ---
 
-# 📍 Case Study
+# 🎯 Tujuan Penelitian
 
-## Tropical Cyclone Cempaka (2017)
+Penelitian ini bertujuan untuk:
 
-Simulation Period
+- Mensimulasikan kondisi atmosfer saat Siklon Tropis Cempaka.
+- Menghasilkan distribusi curah hujan menggunakan WRF.
+- Melihat perkembangan hujan dari waktu ke waktu.
+- Membandingkan hasil simulasi dengan data MSWEP.
+- Mengevaluasi performa model menggunakan beberapa metrik statistik dan spasial.
+
+---
+
+# 📍 Studi Kasus
+
+## Siklon Tropis Cempaka
+
+Periode simulasi:
 
 ```text
 26 November 2017 00:00 UTC
@@ -46,88 +51,86 @@ Simulation Period
 29 November 2017 23:00 UTC
 ```
 
-Study Area
+Wilayah penelitian meliputi:
 
-- Southern West Java
-- Central Java
-- Special Region of Yogyakarta
-- Southern Indian Ocean of Java
+- Jawa Barat bagian Selatan
+- Jawa Tengah
+- DI Yogyakarta
+- Samudra Hindia Selatan Pulau Jawa
 
 ---
 
-# 🛰️ Data Sources
+# 🛰️ Sumber Data
 
 ## ERA5 Reanalysis
 
-ERA5 is used as the atmospheric forcing for WRF.
+Data ERA5 digunakan sebagai:
 
-Purpose:
+- Initial Condition (IC)
+- Boundary Condition (BC)
 
-- Initial Conditions (IC)
-- Boundary Conditions (BC)
-
-Downloaded Variables
-
-Pressure Level
+Variabel Pressure Level:
 
 - Geopotential
 - Temperature
 - Relative Humidity
 - Specific Humidity
-- U-component Wind
-- V-component Wind
+- U Wind
+- V Wind
 
-Single Level
+Variabel Single Level:
 
 - Surface Pressure
 - Mean Sea Level Pressure
 - Total Precipitation
-- Skin Temperature
 - Sea Surface Temperature
-- 2 m Temperature
-- 2 m Dew Point
-- 10 m U Wind
-- 10 m V Wind
+- Skin Temperature
+- 2m Temperature
+- 2m Dew Point
+- 10m U Wind
+- 10m V Wind
 - Soil Temperature
 - Soil Moisture
-- Land-Sea Mask
 - Geopotential
+- Land-Sea Mask
 
 ---
 
 ## MSWEP
 
-MSWEP (Multi-Source Weighted-Ensemble Precipitation)
+MSWEP digunakan sebagai data referensi (observasi) curah hujan.
 
-Used as the rainfall reference dataset for validating WRF simulations.
+Sebelum dilakukan validasi, data MSWEP diinterpolasi terlebih dahulu agar memiliki resolusi grid yang sama dengan WRF.
 
 ---
 
-# ⚙️ Model Configuration
+# ⚙️ Konfigurasi Model
 
-## WRF-ARW
+Model yang digunakan:
 
-Nested Domain Configuration
+**WRF-ARW**
 
-| Domain | Resolution |
-|---------|-----------:|
+Konfigurasi domain:
+
+| Domain | Resolusi |
+|---------|----------:|
 | d01 | 27 km |
 | d02 | 9 km |
 | d03 | 3 km |
 
-The highest-resolution domain (**d03**) is used for statistical validation.
+Domain d03 digunakan sebagai domain utama untuk evaluasi statistik karena memiliki resolusi paling tinggi.
 
 ---
 
-# 📂 Notebook Workflow
+# 📂 Alur Notebook
 
-The notebook is organized into several processing stages.
+Notebook dibagi menjadi beberapa tahapan utama.
 
 ---
 
-# 1️⃣ Load WRF Output
+# 1️⃣ Membaca Output WRF
 
-Read all simulation outputs:
+Notebook membaca seluruh file:
 
 ```python
 wrfout_d01*
@@ -135,59 +138,38 @@ wrfout_d02*
 wrfout_d03*
 ```
 
-Variables extracted include:
+Variabel yang diambil meliputi:
 
 - Latitude
 - Longitude
 - Time
-- Rainfall
-- Atmospheric variables
+- Curah Hujan
+- Variabel atmosfer lainnya
 
 ---
 
-### Output
+📷
 
-📷 *(Insert figure here)*
+*(Masukkan gambar output jika diperlukan)*
 
 ---
 
-# 2️⃣ Compute Total Rainfall
+# 2️⃣ Menghitung Curah Hujan
 
-WRF stores accumulated rainfall using:
+WRF menyimpan hujan dalam bentuk akumulasi.
 
-```text
-RAINC
-+
-RAINNC
-```
-
-where
+Curah hujan total dihitung menggunakan:
 
 ```text
-RAINC
+RAIN = RAINC + RAINNC
 ```
 
-Convective Rainfall
+dimana:
 
-and
+- RAINC = Convective Rainfall
+- RAINNC = Non-Convective Rainfall
 
-```text
-RAINNC
-```
-
-Non-Convective Rainfall.
-
-Therefore,
-
-```text
-Total Rainfall
-
-=
-
-RAINC + RAINNC
-```
-
-Hourly rainfall is calculated by differencing consecutive accumulated outputs:
+Karena nilai tersebut bersifat akumulatif, maka curah hujan per jam dihitung menggunakan:
 
 ```text
 Rain(t)
@@ -203,143 +185,129 @@ Accumulated(t-1)
 
 ---
 
-# 📈 Time Series Analysis
+# 📈 Analisis Time Series
 
-Analyze rainfall evolution during the event.
+Analisis ini bertujuan melihat perkembangan intensitas hujan selama simulasi.
 
-Axis
+Sumbu:
 
 ```text
-X = Time
+X = Waktu
 
-Y = Rainfall (mm/hour)
+Y = Curah Hujan (mm/jam)
 ```
-
----
 
 ## Domain d02
 
-📷 *(Insert figure here)*
+📷
 
 ---
 
 ## Domain d03
 
-📷 *(Insert figure here)*
+📷
 
 ---
 
-# 🗺️ Spatial Rainfall Distribution
+# 🗺️ Distribusi Curah Hujan WRF
 
-## WRF Hourly Rainfall
+## Curah Hujan per Jam
 
-Hourly rainfall distribution over the study area.
-
-📷 *(Insert figure here)*
+📷
 
 ---
 
-## WRF Accumulated Rainfall
+## Curah Hujan Akumulasi
 
-Accumulated rainfall during the entire simulation.
-
-📷 *(Insert figure here)*
+📷
 
 ---
 
-# 🌧️ MSWEP Rainfall
+# 🌧️ Data Observasi MSWEP
 
-## Hourly Rainfall
+## Curah Hujan per Jam
 
-📷 *(Insert figure here)*
-
----
-
-## Accumulated Rainfall
-
-📷 *(Insert figure here)*
+📷
 
 ---
 
-# 🔄 Interpolation
+## Curah Hujan Akumulasi
 
-Before statistical validation,
+📷
 
-MSWEP data are interpolated onto the WRF grid.
+---
+
+# 🔄 Interpolasi
+
+Sebelum dilakukan validasi statistik, data MSWEP diinterpolasi ke grid WRF.
 
 ```text
 MSWEP
 
 ↓
 
-Interpolation
+Interpolasi
 
 ↓
 
-WRF Grid
+Grid WRF
 ```
 
-Purpose:
+Tujuan:
 
-- Match spatial resolution
-- Eliminate grid mismatch
-- Ensure fair statistical comparison
+- Menyamakan resolusi grid
+- Menghindari bias akibat resolusi berbeda
+- Memastikan perbandingan dilakukan pada grid yang sama
 
 ---
 
-# 📍 Domain d02 Evaluation
+# 📍 Evaluasi Domain d02
 
 ## Structural Similarity Index (SSIM)
 
-SSIM evaluates the similarity of rainfall patterns.
+SSIM digunakan untuk mengukur kemiripan pola distribusi hujan antara WRF dan MSWEP.
 
-Range
+Nilai SSIM berada pada rentang:
 
 ```text
 0 → 1
 ```
 
-Higher values indicate better spatial agreement.
+Semakin mendekati **1**, maka pola hujan semakin mirip.
 
----
+### Hasil
 
-### Result
-
-| Metric | Value |
-|---------|------:|
+| Metrik | Nilai |
+|---------|-------:|
 | SSIM | **0.336** |
 
-### Interpretation
+### Interpretasi
 
-An SSIM value of **0.336** indicates that the simulated rainfall pattern shares partial structural similarity with MSWEP observations. Although the general rainfall system is reproduced, noticeable differences remain in the spatial distribution of precipitation.
-
----
-
-## Rainfall Centroid Analysis
-
-The rainfall centroid represents the spatial center of precipitation.
-
-The distance between WRF and MSWEP centroids indicates how accurately WRF locates the main rainfall system.
+Nilai SSIM sebesar **0.336** menunjukkan bahwa WRF mampu membentuk pola hujan yang secara umum menyerupai observasi, namun masih terdapat perbedaan distribusi spasial yang cukup besar.
 
 ---
 
-### Result
+## Rainfall Centroid
 
-| Metric | Value |
-|---------|------:|
+Rainfall Centroid digunakan untuk mengetahui seberapa jauh posisi pusat hujan hasil simulasi terhadap observasi.
+
+### Hasil
+
+| Metrik | Nilai |
+|---------|-------:|
 | Centroid Distance | **175.31 km** |
 
-### Interpretation
+### Interpretasi
 
-The rainfall centroid generated by WRF is displaced by approximately **175 km** relative to MSWEP. This displacement suggests that the model successfully produced the rainfall system but shifted its location, contributing to lower statistical agreement.
+Pusat hujan hasil simulasi WRF bergeser sekitar **175 km** terhadap pusat hujan pada data MSWEP. Hal ini menunjukkan bahwa model berhasil membentuk sistem hujan, namun lokasi hujan utama masih mengalami pergeseran (displacement error).
 
 ---
 
-# 📍 Domain d03 Evaluation
+# 📍 Evaluasi Domain d03
 
-The highest-resolution domain (3 km) is used for quantitative validation.
+Domain d03 digunakan sebagai domain utama untuk validasi statistik.
 
-Metrics include:
+Metrik yang digunakan:
 
 - RMSE
 - MAE
@@ -347,31 +315,29 @@ Metrics include:
 - Pearson Correlation
 - R² Score
 
----
+### Hasil
 
-### Result Table
-
-| Metric | Value |
-|---------|------:|
-| RMSE | **5.93 mm/hour** |
-| MAE | **4.53 mm/hour** |
-| Bias | **-0.85 mm/hour** |
-| Pearson Correlation (r) | **0.034** |
+| Metrik | Nilai |
+|---------|-------:|
+| RMSE | **5.93 mm/jam** |
+| MAE | **4.53 mm/jam** |
+| Bias | **-0.85 mm/jam** |
+| Pearson Correlation | **0.034** |
 | R² Score | **-0.11** |
 
-### Interpretation
+### Interpretasi
 
-- **RMSE (5.93 mm/hour)** indicates that the overall rainfall error remains within a reasonable range for an extreme weather simulation.
-- **MAE (4.53 mm/hour)** shows the average absolute deviation between simulated and observed rainfall.
-- **Bias (-0.85 mm/hour)** suggests a slight underestimation of rainfall intensity by WRF.
-- **Pearson Correlation (0.034)** indicates weak temporal and spatial correspondence with observations.
-- **Negative R²** suggests that the simulated rainfall variability does not adequately explain the observed rainfall variability.
+- RMSE sebesar **5.93 mm/jam** menunjukkan kesalahan prediksi masih berada pada kisaran yang cukup baik untuk simulasi kejadian hujan ekstrem.
+- MAE sebesar **4.53 mm/jam** menunjukkan rata-rata selisih absolut antara hasil simulasi dan observasi.
+- Bias bernilai **-0.85 mm/jam**, menandakan bahwa WRF sedikit meng-underestimate curah hujan dibandingkan MSWEP.
+- Korelasi Pearson yang rendah (**0.034**) menunjukkan hubungan spasial maupun temporal antara simulasi dan observasi masih lemah.
+- Nilai R² yang negatif menunjukkan variasi curah hujan hasil simulasi belum mampu menjelaskan variasi curah hujan observasi dengan baik.
 
 ---
 
 # 🗺️ Difference Map
 
-Spatial rainfall difference
+Difference Map menunjukkan selisih curah hujan antara WRF dan MSWEP.
 
 ```text
 WRF
@@ -381,86 +347,79 @@ WRF
 MSWEP
 ```
 
-Interpretation
+Interpretasi:
 
-Positive values
+- Positif → Overestimate
+- Negatif → Underestimate
 
-→ Overestimation
-
-Negative values
-
-→ Underestimation
-
-📷 *(Insert figure here)*
+📷
 
 ---
 
 # 📉 Scatter Plot
 
-Relationship between
+Scatter Plot digunakan untuk melihat hubungan antara:
 
 ```text
-WRF Rainfall
+Curah Hujan WRF
 
 vs
 
-MSWEP Rainfall
+Curah Hujan MSWEP
 ```
 
-📷 *(Insert figure here)*
+📷
 
 ---
 
-# 📊 Summary
+# 📊 Ringkasan Hasil
 
-| Evaluation | Result |
-|------------|--------:|
+| Evaluasi | Hasil |
+|-----------|-------:|
 | SSIM | **0.336** |
-| Centroid Distance | **175.31 km** |
-| RMSE | **5.93 mm/hour** |
-| MAE | **4.53 mm/hour** |
-| Bias | **-0.85 mm/hour** |
-| Pearson Correlation | **0.034** |
-| R² Score | **-0.11** |
+| Rainfall Centroid | **175.31 km** |
+| RMSE | **5.93 mm/jam** |
+| MAE | **4.53 mm/jam** |
+| Bias | **-0.85 mm/jam** |
+| Pearson (r) | **0.034** |
+| R² | **-0.11** |
 
 ---
 
-# 🔍 Discussion
+# 🔍 Pembahasan
 
-Several important findings can be drawn from this study:
+Berdasarkan hasil simulasi dan validasi terhadap data MSWEP, diperoleh beberapa temuan penting, yaitu:
 
-- WRF successfully simulated the occurrence of heavy rainfall associated with Tropical Cyclone Cempaka.
-- The simulated rainfall intensity is generally close to the observations, as indicated by the relatively low RMSE and small Bias.
-- The spatial rainfall pattern differs from MSWEP, reflected by an SSIM value of **0.336**.
-- The rainfall centroid is displaced by approximately **175 km**, indicating a noticeable spatial shift of the precipitation system.
-- This displacement error is likely one of the primary reasons for the low correlation coefficient.
-- While WRF captures the general evolution of the event, accurately reproducing the exact location and timing of extreme rainfall remains challenging.
-
----
-
-# 🏁 Conclusion
-
-This study demonstrates that the **WRF-ARW model** is capable of reproducing the overall characteristics of the rainfall event associated with **Tropical Cyclone Cempaka (26–29 November 2017)**.
-
-Statistical evaluation shows that the simulated rainfall intensity is reasonably close to MSWEP observations, as reflected by the relatively low RMSE (**5.93 mm/hour**) and small Bias (**−0.85 mm/hour**). However, the weak Pearson Correlation (**0.034**) indicates limited agreement in the spatial-temporal distribution of rainfall.
-
-Spatial validation further reveals an **SSIM of 0.336** and a rainfall centroid displacement of approximately **175 km**, suggesting that the primary limitation of the simulation is **displacement error**, where the rainfall system is reproduced but shifted from the observed location.
-
-Overall, the model successfully represents the occurrence of the extreme rainfall event, but additional improvements—such as optimizing physical parameterizations, refining domain configuration, or applying object-based verification metrics—could further enhance simulation accuracy for tropical cyclone events over Indonesia.
+- Model WRF berhasil mensimulasikan kejadian hujan ekstrem akibat Siklon Tropis Cempaka selama periode simulasi.
+- Intensitas curah hujan yang dihasilkan model relatif mendekati observasi, ditunjukkan oleh nilai RMSE yang cukup rendah dan Bias yang kecil.
+- Pola distribusi hujan masih memiliki perbedaan spasial terhadap observasi, yang ditunjukkan oleh nilai SSIM sebesar **0.336**.
+- Analisis Rainfall Centroid menunjukkan adanya pergeseran pusat hujan sekitar **175 km**, sehingga lokasi hujan maksimum belum sepenuhnya sesuai dengan observasi.
+- Pergeseran spasial tersebut menjadi salah satu penyebab rendahnya nilai korelasi Pearson.
+- Secara umum, WRF telah mampu merepresentasikan karakteristik utama kejadian hujan ekstrem, meskipun masih memerlukan peningkatan dalam mereproduksi lokasi dan distribusi hujan secara lebih akurat.
 
 ---
 
-# 🚀 Future Improvements
+# 🏁 Kesimpulan
 
-Potential developments for future work include:
+Model **WRF-ARW** berhasil mensimulasikan kejadian hujan ekstrem yang dipicu oleh **Siklon Tropis Cempaka** pada periode **26–29 November 2017**.
 
-- Evaluate multiple WRF physics parameterizations.
-- Compare alternative nesting configurations.
-- Validate against BMKG rain gauge observations.
-- Apply categorical verification metrics (POD, FAR, CSI).
-- Implement Fractions Skill Score (FSS).
-- Perform object-based rainfall verification.
-- Investigate displacement error using feature-based verification methods.
+Hasil evaluasi menunjukkan bahwa besaran curah hujan hasil simulasi relatif mendekati data observasi, ditunjukkan oleh nilai **RMSE sebesar 5.93 mm/jam** dan **Bias sebesar -0.85 mm/jam**. Namun demikian, nilai **Pearson Correlation sebesar 0.034** menunjukkan bahwa hubungan spasial maupun temporal antara simulasi dan observasi masih rendah.
+
+Evaluasi spasial melalui **SSIM sebesar 0.336** dan **Rainfall Centroid sejauh 175.31 km** mengindikasikan bahwa kelemahan utama model berada pada **displacement error**, yaitu pergeseran lokasi sistem hujan terhadap observasi.
+
+Secara keseluruhan, konfigurasi WRF yang digunakan telah mampu merepresentasikan karakteristik umum hujan ekstrem selama Siklon Tropis Cempaka. Meskipun demikian, peningkatan konfigurasi model, parameterisasi fisik, maupun metode validasi masih diperlukan agar hasil simulasi semakin mendekati kondisi observasi.
+
+---
+
+# 🚀 Pengembangan Selanjutnya
+
+Beberapa pengembangan yang dapat dilakukan pada penelitian berikutnya:
+
+- Mencoba kombinasi parameterisasi fisik WRF yang berbeda.
+- Menguji konfigurasi domain lain.
+- Membandingkan hasil simulasi dengan data observasi BMKG.
+- Menambahkan evaluasi menggunakan POD, FAR, CSI, dan Fractions Skill Score (FSS).
+- Menggunakan metode validasi berbasis objek (Object-Based Verification) untuk menganalisis displacement error.
 
 ---
 
@@ -470,4 +429,4 @@ Potential developments for future work include:
 
 Telkom University
 
-Atmospheric Modeling • WRF • ERA5 • MSWEP • Tropical Cyclone • Numerical Weather Prediction
+Atmospheric Modeling • WRF • ERA5 • MSWEP • Tropical Cyclone Cempaka
