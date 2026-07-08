@@ -441,7 +441,7 @@ Beberapa pengembangan yang dapat dilakukan pada penelitian berikutnya:
 
 # 👨‍💻 Author
 
-**Powy Alcuino**
+**Raditya Satria Pratama**
 
 Telkom University
 
